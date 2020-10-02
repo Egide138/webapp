@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Isabwe Egide Login</title>
+        <link rel="stylesheet" href="Login.css">
+        
+
+    </head>
+    <body>
+        <header class="background-color">
+        <div class="aligndata">
+        <h1>ISABWE Egide</h1>
+        <h2>[Fountain of Wisdom]</h2>
+        </div>
+        <nav class="aligndata">
+        <a href="../index.html"><h3 class="homeback">Home</h3></a>
+        <a href="about.html"><h3>About</h3></a>
+        <a href="resource.html"><h3>Resources</h3></a>
+        <a href="Blog.html"><h3>Blogs</h3></a>
+        <a href="register.html"><h3>register</h3></a>
+        <a href="Login.html"><h3>Login</h3></a>
+       <a href="contact.html"><h3>Contact</h3></a> 
+        </nav>
+        </header>
+        
+<div class="aligndata2">
+    <h2>Login Form</h2>
+    </div>
+    <div class="container">
+    <div>
+    <h4>Fountain of wisdom</h4>
+    </div>
+    <div class="container2">
+<form id="LoginId" method="POST">
+    <label for="username"><b>Email</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit">Sign in</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label><br><br>
+    <button type="button">Cancel</button><br><br>
+    <span>Forgot <a href="#">password?</a></span>
+</form>
+</div>
+</div>
+        </header>
+        <footer class="background-colorfooter">
+
+        </footer>
+
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js" ></script>
+<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js" ></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAwZZe92mYE06gicFNQC2UIM4A6P-aS1WM",
+    authDomain: "mybrand-24c24.firebaseapp.com",
+    databaseURL: "https://mybrand-24c24.firebaseio.com",
+    projectId: "mybrand-24c24",
+    storageBucket: "mybrand-24c24.appspot.com",
+    messagingSenderId: "255210721365",
+    appId: "1:255210721365:web:8c721b021e7bd124f004dc"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth=firebase.auth();
+  const db=firebase.firestore();
+  const LoginForm=document.querySelector("#LoginId");
+
+  auth.onAuthStateChanged((user) => {
+        if (user) {
+          location.href = "Blog.html";
+        }
+      });
+      
+// sign up
+
+LoginForm.addEventListener('submit',(e)=>{
+    e.PreventDefault();
+    const email =LoginForm.uname.value
+    const password=LoginForm.psw.value
+   auth.signInWithEmailAndPassword(email, password).catch(function(error) {
+  
+});
+})
+
+</script>
+    </body>
+    </html>

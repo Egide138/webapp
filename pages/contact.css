@@ -1,0 +1,76 @@
+.background-color{
+    background-color:black;
+    color:white;
+    height:250px;
+    width: 100%;
+}
+.aligndata{
+    display: flex;
+}
+
+.aligndata h2{
+    padding-left: 500px;
+    padding-top: 60px;
+}
+.aligndata h1{
+    padding-left: 150px;
+    padding-top: 25px;
+    font-size:50px;
+}
+.aligndata h3{
+    padding-left: 40px;
+    position: relative;
+    left:300px;
+    top:20px;  
+}
+.background-colorfooter{
+    background-color: black;
+    width: 100%;
+    height: 150px;
+}
+
+input[type=text], input[type=password] {
+  width: 40%;
+  padding: 10px 30px;
+  margin: 8px 0;
+  display: flex;
+  border: 1px solid #000;
+  background-color: #DBD7D7;
+  border-radius: 10px;
+
+}
+textarea{
+    background-color:  #DBD7D7;
+    width: 45%;
+    border-radius: 10px;
+}
+
+button {
+  background-color: #2FBFC8;
+  color: white;
+  padding: 5px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 10px;
+}
+.aligndata2 h2{
+    text-align: center;
+}
+.container2{
+    margin-left: 400px;
+}
+.aligndata a{
+    text-decoration: none;
+    color:white;
+}
+.homeback{
+    background-color: #2FBFC8;
+    width: 90%;
+    height: 50%;
+    border-radius: 10px;
+}
+h3:hover{
+    color: yellow;
+   }

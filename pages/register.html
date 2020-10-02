@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Isabwe Egide Register</title>
+        <link rel="stylesheet" href="register.css">
+        
+
+    </head>
+    <body>
+        <header class="background-color">
+        <div class="aligndata">
+        <h1>ISABWE Egide</h1>
+        <h2>[Fountain of Wisdom]</h2>
+        </div>
+        <nav class="aligndata">
+        <a href="../index.html"><h3 class="homeback">Home</h3></a>
+        <a href="about.html"><h3>About</h3></a>
+        <a href="resource.html"><h3>Resources</h3></a>
+        <a href="Blog.html"><h3>Blogs</h3></a>
+        <a href="register.html"><h3>register</h3></a>
+        <a href="Login.html"><h3>Login</h3></a>
+        <a href="contact.html"><h3>Contact</h3></a>
+        </nav>
+        </header>
+        
+<div class="aligndata2">
+    <h2>Register User-Form</h2>
+    </div>
+
+    <div class="container2">
+<form id="registerId">
+    <label for="Name"><b>Names</b></label>
+    <input type="text" placeholder="Enter your names" name="Name" required>
+    <label for="Email"><b>Email</b></label>
+    <input type="text" placeholder="Enter  your Email" name="Email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="psw"><b>Repeat password</b></label>
+    <input type="password" placeholder="Enter Password" name="rpsw">
+    <button type="submit">Register</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label><br><br>
+    <button type="button">Cancel</button><br><br>
+
+</form>
+</div>
+
+        <footer class="background-colorfooter">
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js" ></script>
+<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js" ></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAwZZe92mYE06gicFNQC2UIM4A6P-aS1WM",
+    authDomain: "mybrand-24c24.firebaseapp.com",
+    databaseURL: "https://mybrand-24c24.firebaseio.com",
+    projectId: "mybrand-24c24",
+    storageBucket: "mybrand-24c24.appspot.com",
+    messagingSenderId: "255210721365",
+    appId: "1:255210721365:web:8c721b021e7bd124f004dc"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth=firebase.auth();
+  const db=firebase.firestore();
+
+// sign up
+const registerForm=document.querySelector("#registerId");
+
+registerForm.addEventListener('submit',(e)=>{
+e.preventDefault();
+
+//get user info
+const name=registerForm.Name.value
+const email=registerForm.Email.value
+const password=registerForm.psw.value
+const repeatpsword=registerForm.rpsw.value
+
+if(registerForm.psw.value.match(repeatpsword)){
+auth.createUserWithEmailAndPassword(email,password).then(response =>{
+    console.log('signed up!')
+    
+})
+}
+else{
+  cnsole.log('passwords dont match!')
+}
+})
+
+
+</script>
+        </body>
+</html>

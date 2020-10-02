@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Isabwe Egide contact</title>
+        <link rel="stylesheet" href="contact.css">
+        
+    </head>
+    <body>
+        <header class="background-color">
+        <div class="aligndata">
+        <h1>ISABWE Egide</h1>
+        <h2>[Fountain of Wisdom]</h2>
+        </div>
+        <nav class="aligndata">
+        <a href="../index.html"><h3 class="homeback">Home</h3></a>
+        <a href="about.html"><h3>About</h3></a>
+        <a href="resource.html"><h3>Resources</h3></a>
+        <a href="Blog.html"><h3>Blogs</h3></a>
+        <a href="register.html"><h3>register</h3></a>
+        <a href="Login.html"><h3>Login</h3></a>
+        <a href="contact.html"><h3>Contact</h3></a>
+        </nav>
+        </header>
+        
+<div class="aligndata2">
+    <h2>Contact us</h2>
+    </div>
+
+    <div class="container2">
+<form id=formsection>
+    <label for="Name"><b> First Name</b></label>
+    <input type="text" placeholder="Enter your name" name="Fname" id="firstname" >
+    <label for="Name"><b>Last Name</b></label>
+    <input type="text" placeholder="Enter  your name" name="Lname" id="lastname" >
+
+    <label for="Email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="mail" id="email" >
+    <label for="text"><b>Phone number</b></label>
+    <input type="text" placeholder="Enter your phone number" name="telephone" id="phone" >
+    <span><strong>comment or message</strong></span>
+    <br>
+    <textarea id="message" rows="4" name="message"></textarea>
+     <br>
+    <button type="submit" >submit</button>
+    <button type="button" >Reset</button><br>
+    <p id="invalidMsg" style="color: red; font-size: 20px;"></p>
+
+</form>
+</div>
+<footer class="background-colorfooter">
+
+</footer>
+<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js" ></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAwZZe92mYE06gicFNQC2UIM4A6P-aS1WM",
+    authDomain: "mybrand-24c24.firebaseapp.com",
+    databaseURL: "https://mybrand-24c24.firebaseio.com",
+    projectId: "mybrand-24c24",
+    storageBucket: "mybrand-24c24.appspot.com",
+    messagingSenderId: "255210721365",
+    appId: "1:255210721365:web:8c721b021e7bd124f004dc"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db=firebase.firestore();
+
+  const formContact= document.querySelector("#formsection");
+  const invalidMsg=document.getElementById('invalidMsg')
+ 
+
+  const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+function validate(){
+    if  (formContact.Fname.value.length<1){
+        invalidMsg.innerHTML="Enter your first name!"
+    
+    
+    } else if(formContact.Lname.value.length<1){
+        invalidMsg.innerHTML="Enter your last name!"
+    } else if (!formContact.mail.value.match(validEmail)){
+        invalidMsg.innerHTML="invalid email"
+    }
+    else if(formContact.telephone.value.length!=10){
+        invalidMsg.innerHTML="Enter your phone!"
+    } else if(formContact.message.value.length<2){
+        invalidMsg.innerHTML="Enter your message!"
+    } else{
+        return true;
+    }
+}
+
+formContact.addEventListener("submit", (e) =>{
+  e.preventDefault();
+if(validate()){
+    db.collection("contact").doc().set({
+    firstname: formContact.Fname.value,
+    lastname: formContact.Lname.value,
+    email: formContact.mail.value,
+    phone: formContact.telephone.value,
+    message: formContact.message.value
+  }).then(function(){
+      formContact.Fname.value=""
+      formContact.Lname.value=""
+      formContact.mail.value=""
+      formContact.telephone.value=""
+      formContact.message.value=""
+      
+  })
+}
+  
+});
+
+</script>
+   
+</body>
+</html>  
