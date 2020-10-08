@@ -29,6 +29,7 @@
 
     <div class="container2">
 <form id="registerId">
+  
     <label for="Name"><b>Names</b></label>
     <input type="text" placeholder="Enter your names" name="Name" required>
     <label for="Email"><b>Email</b></label>
@@ -38,11 +39,9 @@
     <input type="password" placeholder="Enter Password" name="psw" required>
     <label for="psw"><b>Repeat password</b></label>
     <input type="password" placeholder="Enter Password" name="rpsw">
-    <button type="submit">Register</button>
+    <button type="submit" >Register</button>
     <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label><br><br>
-    <button type="button">Cancel</button><br><br>
+      <p id="notice" style="background-color:bisque; width: 30%; justify-content: center;"></p>
 
 </form>
 </div>
@@ -70,6 +69,7 @@
   firebase.initializeApp(firebaseConfig);
   const auth=firebase.auth();
   const db=firebase.firestore();
+  
 
 // sign up
 const registerForm=document.querySelector("#registerId");
@@ -86,6 +86,7 @@ const repeatpsword=registerForm.rpsw.value
 if(registerForm.psw.value.match(repeatpsword)){
 auth.createUserWithEmailAndPassword(email,password).then(response =>{
     console.log('signed up!')
+    document.getElementById('notice').innerHTML="MESSAGE SENT"
     
 })
 }

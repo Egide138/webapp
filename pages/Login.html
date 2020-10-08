@@ -83,7 +83,8 @@
 // sign up
 
 LoginForm.addEventListener('submit',(e)=>{
-    e.PreventDefault();
+  console.log("hello")
+  e.preventDefault();
     const email =LoginForm.uname.value
     const password=LoginForm.psw.value
    auth.signInWithEmailAndPassword(email, password).catch(function(error) {

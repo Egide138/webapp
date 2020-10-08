@@ -70,7 +70,7 @@
             <img src="egide2.jpg" class="image-size2" alt="blog photo">
             <li>Eagle not a chicken</li>
     </ul>
-            <button onclick="logout()"type="button" style="color:cornsilk; font-size:20px; width:100%;
+            <button onclick="logout()" type="button" style="color:cornsilk; font-size:20px; width:100%;
              background-color: #222;" >Logout</button>
             <button type="button" style="color:cornsilk; font-size:20px; 
             width:100%; background-color: #222;">Download</button>
@@ -82,6 +82,7 @@
         </footer>
 
         <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js" ></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js" ></script>
         <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
 
 
@@ -101,7 +102,9 @@
   const db=firebase.firestore();
   
   function logout(){
-  firebase.auth().signOut();
+  firebase.auth().signOut().then(()=>{
+      location.href="Login.html";
+  });
   }
    
   
