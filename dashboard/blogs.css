@@ -1,0 +1,39 @@
+.bloghead {
+    background-color: black;
+    text-align: center;
+    padding: 4rem;
+  }
+  
+  *{
+      margin: 0;
+      padding: 0;
+  }
+  .content {
+    text-align: center;
+    background-origin: shadow 2%;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 10px;
+    padding: 1rem;
+  }
+  .content:hover {
+    background-color: snow;
+  }
+  .bigcontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-gap: 1rem;
+    max-width: 1200px;
+    margin: 1rem auto;
+  }
+  button {
+    border: none;
+    padding: 0.5rem 2rem;
+    background-color: skyblue;
+    border-radius: 2rem;
+  }
+  .footer-background{
+      background-color: black;
+  }
+  
+  
+  
