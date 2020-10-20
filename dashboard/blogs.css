@@ -1,8 +1,23 @@
 .bloghead {
-    background-color: black;
+  background-color: black;
+}
+.bloghead h1{
     text-align: center;
     padding: 4rem;
+    position: relative;
+    animation-name: myname;
+    animation: mymove 5s infinite;  
   }
+
+   #div1{animation-timing-function: linear;
+  } 
+  
+  @keyframes mymove{
+    from {left: 0px;}
+  to {left: 300px;}
+  
+}
+
   
   *{
       margin: 0;
@@ -31,9 +46,4 @@
     background-color: skyblue;
     border-radius: 2rem;
   }
-  .footer-background{
-      background-color: black;
-  }
-  
-  
-  
+ 
