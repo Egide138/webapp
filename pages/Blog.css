@@ -67,3 +67,8 @@
 h3:hover {
   color: yellow;
 }
+form{
+  text-align: center;
+  width: 55rem;
+  margin-left: 15rem;
+}

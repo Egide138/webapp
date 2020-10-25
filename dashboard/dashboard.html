@@ -29,26 +29,42 @@
     </div>
 
     <div class="overall">
-<form class="blogback" id="dashboardId">
-    <p>Blog Side</p>
+<form class="blogback" id="dashboardId" enctype="multipart/form-data">
+    <p>Create Blog</p>
   <div>
-    <button>Add a photo</button>
-    <textarea rows="2" style=" width: 90%; border-radius: 1rem;" placeholder="Title" name="TitleB"></textarea>
-    
-        <textarea  style="width: 90%;" placeholder="Write your blog" rows="12" name="contentB" > 
-         </textarea>
+    <!-- <button>Add a photo</button> -->
+    <input type="file" name="imageB" id="myImg" >
+    <textarea rows="2" style=" width: 90%; border-radius: 1rem;" placeholder="Title" name="TitleB"></textarea> 
+     <textarea  style="width: 90%;" placeholder="Write your blog" rows="12" name="contentB" > </textarea>
     </div>
     <div>
-    <button type="button">Save</button>
-    <button type="button">Edit</button>
-    <button type="button">Delete</button>
-    <button type="button">publish</button>
-    <button type="button">Upload PDF</button>
-    <button type="button">Logout</button>
+    <button type="submit">submit</button>
+    <!-- <button type="button">Edit</button> -->
+    <!-- <button type="button">Delete</button> -->
+    <!-- <button type="button">publish</button> -->
+    <!-- <button type="button">Upload PDF</button> -->
+    <!-- <button type="button">Logout</button> -->
 </div>
 </form>
-
-<div class="audioback">
+<form class="UpdateB" id="dashboardId" enctype="multipart/form-data">
+    <p>Update Blog</p>
+  <div>
+    <!-- <button>Add a photo</button> -->
+    <input type="file" name="imageB" id="myImg" >
+    <textarea rows="2" style=" width: 90%; border-radius: 1rem;" placeholder="Title" name="TitleB"></textarea> 
+     <textarea  style="width: 90%;" placeholder="Write your blog" rows="12" name="contentB" > </textarea>
+    </div>
+    <div>
+    <button type="submit">submit</button>
+    <!-- <button type="button">Edit</button> -->
+    <!-- <button type="button">Delete</button> -->
+    <!-- <button type="button">publish</button> -->
+    <!-- <button type="button">Upload PDF</button> -->
+    <!-- <button type="button">Logout</button> -->
+</div>
+</form>
+<!-- <form> -->
+<!-- <div class="audioback">
     <p>Audio Side</p>
     <button type="button">Save</button>
     <div>
@@ -62,7 +78,7 @@
     <div><i class="fa fa-headphones" style="padding:20px;color: #222; font-size: 200px;"></i></div>
     
 </div>
-</form>
+</form> -->
 </div>
         </header>
         <footer class="background-colorfooter">
@@ -85,20 +101,74 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  const db=firebase.firestore();
-const dashboardForm=document.querySelector('#dashbordId')
-dashboardForm.addEventListener('submit',(e)=>{
-e.preventDefault();
-const Title=dashboardForm.TitleB.value
-const content=dashboardForm.contentB.value
+//   const db=firebase.firestore();
+// dashboardForm.addEventListener('submit',(e)=>{
+// e.preventDefault();
+// const Title=dashboardForm.TitleB.value
+// const content=dashboardForm.contentB.value
 
-db.collection("blog").doc().set({
-    title: formContact.Fname.value,
-    content: formContact.Lname.value,
-}).then(function(){
-    console.log('blog received')
+// db.collection("blog").doc().set({
+//     title: formContact.Fname.value,
+//     content: formContact.Lname.value,
+// }).then(function(){
+//     console.log('blog received')
+// })
+// })
+
+const id=location.href.split('?id=')[1]
+ const UpdateB=document.querySelector('.UpdateB')
+// console.log(id)
+fetch(`https://egideserver.herokuapp.com/blog/${id}`).then((res)=>{
+    res.json().then((data)=>{
+//  console.log(data)
+  UpdateB.TitleB.value = data.post.title
+  UpdateB.contentB.value=data.post.body
+
+ 
+    })
 })
+
+UpdateB.addEventListener('submit', async(e)=>{
+    e.preventDefault()
+    const title=UpdateB.TitleB.value
+    const body=UpdateB.contentB.value
+    const res = await  fetch(`https://egideserver.herokuapp.com/blog/${id}`,{
+        method:'PATCH', 
+        headers:{'Content-Type':'application/json; charset=utf-8'},
+        body:JSON.stringify({title, body})
+    })
+    const data = await  res.json()
+    console.log(data)
+         
+  })
+
+const dashboardForm=document.querySelector('.blogback')
+
+dashboardForm.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    // console.log('clicked')
+    const title = dashboardForm.TitleB.value
+    const photo=dashboardForm.imageB.value
+    const body = dashboardForm.contentB.value
+    
+
+fetch('https://egideserver.herokuapp.com/blog',{
+        method:'post',
+        headers:{'Content-Type':'application/json; charset=utf-8'},
+        body:JSON.stringify({
+            title,
+            photo,
+            body
+        })
+    }).then((res)=>{
+        res.json().then(data=>{
+        // console.log(data)
+    })
+    })
+    
 })
+
+
 </script>
     </body>
 </html>

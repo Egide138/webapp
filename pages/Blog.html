@@ -27,30 +27,14 @@
 <div class="aligndata2">
     <h2>Welcome to Blog Page!</h2>
    </div>
-    <form id="blogId">
+    <div id="blogId">
     
-
-        <div class="image-size">
-            <h2>Be Polished & Shine</h2>
-        <img src="egide1.jpg" alt="blog photo">
-
-           <p> It hurts to be hurt—repeatedly! But consider this: “When people hurt you over and over, think of 
-            them like sand paper. They may scratch and hurt you a bit, but in the end, you end up polished and 
-            they end up useless” (Chris Colfer, actor).
-            
-            Incredible though it may seem, God often employs the hurtful actions of people to bless us! 
-            He uses them like abrasive or coarse “sand paper,” to polish or “smooth off the rough spots” in our live
-            s. Think of the envy & betrayal of Joseph’s brothers, the lies & slander of Potiphar’s wife, and the forge
-            tfulness of the chief-cupbearer. Amazingly, God used these hurtful actions to prepare and promote 
-            Joseph to become prime minister (Genesis 39-41)!
-            
-            Are you wondering about the prickly, mean, and vicious people who keep showing up in your life?
-             They’re providential sand papers. Be polished by them! God uses even the worst people to bring out
-             the best in us. Shine through your hurts!</p>
-            
+<div class="post-container">
+</div> 
+      <form>       
 <textarea type="text" rows=5 style="width: 100%; border-radius: 10px;">Write your comment</textarea>
 <button type="button" style="width: 50%; padding: .5rem 0rem;">Comment</button>
-</div>
+
 </form>
 
         <footer class="background-colorfooter">
@@ -82,8 +66,24 @@
       location.href="Login.html";
   });
   }
+  const id= location.href.split('?id=')[1]
+
+  console.log(id)
    
+   const bigcontainer=document.querySelector('.post-container')
   
+ fetch(`https://egideserver.herokuapp.com/blog/${id}`).then(res=>{
+res.json().then(data=>{
+    const blog=data.post
+    bigcontainer.innerHTML+=` <div class="image-size">
+            <h2>${blog.title}</h2>
+        <img src="egide4.jpg" alt="blog photo">
+             <p> ${blog.body}</p>
+    </div>`
+})
+
+
+ })
   </script>
     </body>
 </html>

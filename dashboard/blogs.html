@@ -16,39 +16,35 @@
     </div>
 
     <div class="bigcontainer">
-        <div class="content">
-             <h1>The first title for my blog</h1>
-             <img src="cap1.PNG" alt="my photo blog" style="width: 100%;">
-             <p>I’m trying to hold my breath,Let it stay this way ,Can’t let this moment end
-                You set off a dream in me.Getting louder now
-                Can you hear it echoing?Take my hand,Will you share this with me?
-            </p>  
-           
-          <a href="../pages/Blog.html"><button >read more</button></a>  
-       </div>
-        <div class="content">
-             <h1>The first title for my blog</h1>
-             <img src="../pages/egide2.jpg" alt="my photo blog" style="width: 100%;">
-             <p>I’m trying to hold my breath,Let it stay this way ,Can’t let this moment end
-                You set off a dream in me.Getting louder now
-                Can you hear it echoing?Take my hand,Will you share this with me?
-            </p>  
-            
-            <a href="../pages/Blog.html"><button >read more</button></a>
-       </div>
-        <div class="content">
-             <h1>The first title for my blog</h1>
-             <img src="cap1.PNG" alt="my photo blog" style="width: 100%;">
-             <p>I’m trying to hold my breath,Let it stay this way ,Can’t let this moment end
-                You set off a dream in me.Getting louder now
-                Can you hear it echoing?Take my hand,Will you share this with me?
-            </p>  
-            
-            <a href="../pages/Blog.html"><button >read more</button></a>
-       </div>
-    </div> 
+        
+</div> 
           <footer class="footer-background">
            <p>copyright</p>
           </footer>  
+
+          <script>
+
+              const bigContainer = document.querySelector('.bigcontainer')
+              fetch('https://egideserver.herokuapp.com/blog').then((res)=>{
+        res.json().then(data=>{
+        const posts=data.post
+        let html =''
+posts.forEach(post=>{
+ html+=`
+    <div class="content">
+             <h1>${post.title}</h1>
+             <img src="../pages/egide4.jpg"  alt="my photo blog" style="width: 100%;">
+             <p>${post.body}
+            </p>  
+          <a href="../pages/Blog.html?id=${post._id}"><button >read more</button></a>  
+       </div>
+    
+    `
+    
+})
+bigContainer.innerHTML=html
+    })
+    })
+          </script>
 </body>
 </html>

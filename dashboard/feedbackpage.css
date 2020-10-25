@@ -1,0 +1,37 @@
+.head{
+    background-color: black;
+    color: white;
+    padding: 3rem;
+    text-align: center;
+}
+.head h2{
+    background-color: skyblue;
+    border-radius: 1rem;
+    width: fit-content;
+    padding: 1rem;
+    
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.content{
+background-color: beige;
+color: black;
+border: 1px solid black;
+grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-gap: 1rem;
+  max-width: 1200px;
+  margin: 1rem auto;
+
+}
+.foot{
+    background-color: black;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
