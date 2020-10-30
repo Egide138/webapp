@@ -32,35 +32,27 @@
 <form class="blogback" id="dashboardId" enctype="multipart/form-data">
     <p>Create Blog</p>
   <div>
-    <!-- <button>Add a photo</button> -->
+    
     <input type="file" name="imageB" id="myImg" >
     <textarea rows="2" style=" width: 90%; border-radius: 1rem;" placeholder="Title" name="TitleB"></textarea> 
      <textarea  style="width: 90%;" placeholder="Write your blog" rows="12" name="contentB" > </textarea>
     </div>
     <div>
     <button type="submit">submit</button>
-    <!-- <button type="button">Edit</button> -->
-    <!-- <button type="button">Delete</button> -->
-    <!-- <button type="button">publish</button> -->
-    <!-- <button type="button">Upload PDF</button> -->
-    <!-- <button type="button">Logout</button> -->
+    
 </div>
 </form>
 <form class="UpdateB" id="dashboardId" enctype="multipart/form-data">
     <p>Update Blog</p>
   <div>
-    <!-- <button>Add a photo</button> -->
+    
     <input type="file" name="imageB" id="myImg" >
     <textarea rows="2" style=" width: 90%; border-radius: 1rem;" placeholder="Title" name="TitleB"></textarea> 
      <textarea  style="width: 90%;" placeholder="Write your blog" rows="12" name="contentB" > </textarea>
     </div>
     <div>
     <button type="submit">submit</button>
-    <!-- <button type="button">Edit</button> -->
-    <!-- <button type="button">Delete</button> -->
-    <!-- <button type="button">publish</button> -->
-    <!-- <button type="button">Upload PDF</button> -->
-    <!-- <button type="button">Logout</button> -->
+    
 </div>
 </form>
 <!-- <form> -->
@@ -101,30 +93,15 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-//   const db=firebase.firestore();
-// dashboardForm.addEventListener('submit',(e)=>{
-// e.preventDefault();
-// const Title=dashboardForm.TitleB.value
-// const content=dashboardForm.contentB.value
 
-// db.collection("blog").doc().set({
-//     title: formContact.Fname.value,
-//     content: formContact.Lname.value,
-// }).then(function(){
-//     console.log('blog received')
-// })
-// })
 
 const id=location.href.split('?id=')[1]
  const UpdateB=document.querySelector('.UpdateB')
-// console.log(id)
 fetch(`https://egideserver.herokuapp.com/blog/${id}`).then((res)=>{
     res.json().then((data)=>{
-//  console.log(data)
+
   UpdateB.TitleB.value = data.post.title
   UpdateB.contentB.value=data.post.body
-
- 
     })
 })
 
@@ -146,23 +123,22 @@ const dashboardForm=document.querySelector('.blogback')
 
 dashboardForm.addEventListener('submit',(e)=>{
     e.preventDefault()
-    // console.log('clicked')
     const title = dashboardForm.TitleB.value
-    const photo=dashboardForm.imageB.value
+    const photo=dashboardForm.imageB.files[0]
     const body = dashboardForm.contentB.value
+console.log(photo)
+    const formData = new FormData()
+     formData.append("title", title)
+     formData.append("body", body)
+     formData.append("image",photo)
     
-
-fetch('https://egideserver.herokuapp.com/blog',{
+fetch(`https://egideserver.herokuapp.com/blog`,{
         method:'post',
-        headers:{'Content-Type':'application/json; charset=utf-8'},
-        body:JSON.stringify({
-            title,
-            photo,
-            body
-        })
+        body:formData,
+
     }).then((res)=>{
         res.json().then(data=>{
-        // console.log(data)
+        console.log(data)
     })
     })
     

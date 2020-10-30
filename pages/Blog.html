@@ -3,7 +3,8 @@
     <head>
         <title>Isabwe Egide Blog</title>
         <link rel="stylesheet" href="Blog.css">
-        
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
 
     </head>
     <body>
@@ -23,20 +24,28 @@
         <h3 style="cursor: pointer;" onclick="logout()">Logout</h3>
         </nav>
         </header>
-        
+   <div class="centered">
 <div class="aligndata2">
     <h2>Welcome to Blog Page!</h2>
    </div>
-    <div id="blogId">
-    
+  
+ <div class="loadercontainer">
+   <div class="loader" id="loaderId"></div>
+</div>
+
 <div class="post-container">
-</div> 
-      <form>       
-<textarea type="text" rows=5 style="width: 100%; border-radius: 10px;">Write your comment</textarea>
-<button type="button" style="width: 50%; padding: .5rem 0rem;">Comment</button>
 
-</form>
-
+    
+</div>
+        <form id="commentId" class="image-size"> 
+            <p><strong>LEAVE A COMMENT</strong></p>      
+       <textarea type="text" rows=5 style="width: 60%; border-radius: 10px;" name="txt">Write your comment</textarea>
+       <button type="submit" style="width: 50%; padding: .5rem 0rem;" >Comment</button>
+       </form>
+       <div class="comment-container">
+           
+       </div>
+   </div>
         <footer class="background-colorfooter">
 
         </footer>
@@ -67,23 +76,85 @@
   });
   }
   const id= location.href.split('?id=')[1]
+  function tolike(){
+          fetch(`https://egideserver.herokuapp.com/blog/${id}/like`,{method:'PATCH', 
+          headers:{'content-type':'application/json; charset=utf-8'}}).then((res)=>{
+              res.json().then((data)=>{
+                  console.log(data)
+           
+              })
+          })
+      }        
 
-  console.log(id)
+  function hideLoader(){
+      document.getElementById('loaderId').style.display='none';
+      document.querySelector('.loadercontainer').style.display='none';
+  }
+
+//   console.log(id)
    
    const bigcontainer=document.querySelector('.post-container')
-  
+
  fetch(`https://egideserver.herokuapp.com/blog/${id}`).then(res=>{
 res.json().then(data=>{
     const blog=data.post
+    if(blog){
+        hideLoader()
+    }
+    
     bigcontainer.innerHTML+=` <div class="image-size">
             <h2>${blog.title}</h2>
-        <img src="egide4.jpg" alt="blog photo">
+        <img src="${blog.photo}" >
              <p> ${blog.body}</p>
+             <div class="commentAndLike">
+             <i class="fa fa-heart" style="color:red"onclick="tolike()">${blog.Like}</i>
+             <i class="fa fa-comment" id="icon">${blog.commentNumber}</i>
+             </div>
     </div>`
 })
-
-
  })
+
+ const commentsBlog=document.querySelector('#commentId')
+ commentsBlog.addEventListener('submit', (e)=>{
+     e.preventDefault()
+     const comment=commentsBlog.txt.value
+     console.log(comment)
+     fetch(`https://egideserver.herokuapp.com/blog/${id}/comment`,{
+       method:'POST',
+       headers:{'Content-Type':'application/json; charset=utf-8'},
+       body:JSON.stringify({
+           comment
+       })
+    
+    }).then((res)=>{
+        res.json().then((data)=>{
+            console.log(data)
+            render()
+        })
+    })
+ })
+ function render(){ 
+ const commentc=document.querySelector('.comment-container')
+fetch(`https://egideserver.herokuapp.com/blog/${id}/comment`).then((res)=>{
+    res.json().then((data)=>{
+
+let html=''
+        const cmt=data.message
+console.log(cmt)
+        cmt.forEach(element => {
+            
+            html+=`<div class="commentlook">
+                
+                <p>
+                ${element.comment}</p>
+                </div>`
+        });
+    commentc.innerHTML=html
+    })
+})
+}
+render()
+ 
   </script>
     </body>
 </html>

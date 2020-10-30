@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
     <link rel="stylesheet" href="blogs.css">
     <title>Blogshub</title>
 </head>
@@ -11,32 +13,45 @@
         
     <h1 id="div1" style="color: white;">Welcome to Blogs </h1>
         </header>
-    <div>
+        
 
-    </div>
+        <div class="loader" id="loaderId"></div>
 
     <div class="bigcontainer">
         
 </div> 
           <footer class="footer-background">
-           <p>copyright</p>
+           <p>copyright2020</p>
           </footer>  
 
           <script>
-
+    //            const id= location.href.split('?id=')[1]
+      
+function hideLoader(){
+      document.getElementById('loaderId').style.display='none';
+}
               const bigContainer = document.querySelector('.bigcontainer')
               fetch('https://egideserver.herokuapp.com/blog').then((res)=>{
         res.json().then(data=>{
         const posts=data.post
+        
+        if(posts){
+            hideLoader()
+        }
         let html =''
 posts.forEach(post=>{
  html+=`
     <div class="content">
              <h1>${post.title}</h1>
-             <img src="../pages/egide4.jpg"  alt="my photo blog" style="width: 100%;">
+             <img src="${post.photo}"  alt="my photo blog" style="width: 100%;">
              <p>${post.body}
             </p>  
-          <a href="../pages/Blog.html?id=${post._id}"><button >read more</button></a>  
+            <div class="commentAndLike">
+             <i class="fa fa-heart" style="color:red">${post.Like}</i>
+             <i class="fa fa-comment">${post.commentNumber}</i>
+             </div>
+          <a href="../pages/Blog.html?id=${post._id}"><button >read more</button></a> 
+           
        </div>
     
     `
